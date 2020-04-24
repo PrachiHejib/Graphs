@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1587738558698.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2522437260",
+    "id" : "37105C70",
+    "lastKnownWriteTime" : 1587739595,
+    "last_content_update" : 1587739595187,
+    "path" : "~/Desktop/experiment1/Rlotterydiagrams/Script.R",
+    "project_path" : "Script.R",
+    "properties" : {
+        "cursorPosition" : "1,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

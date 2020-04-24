@@ -1,0 +1,1 @@
+#Setting up lottery rectangles 

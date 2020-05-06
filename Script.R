@@ -5,6 +5,8 @@ rm(list = ls(all = TRUE))
 install.packages("ggplot2")
 library(ggplot2)
 library(readxl)
+library("RColorBrewer", lib.loc="/Library/Frameworks/R.framework/Versions/3.5/Resources/library")
+
 
 #plot from data 
 Lotteries_Code_2 <- read_excel("~/Documents/OneDrive_ University_of_East Anglia/UEA/Year_2/Paper_1 /Experiment /Lotteries_Code_2.xlsx")
@@ -20,6 +22,8 @@ df <- data.frame(
   w = rep(1, 100)
 )
 
-ggplot(df, aes(x, y, width = w)) +
-  geom_tile(aes(fill = z), colour = "blue") 
+a <- ggplot(df, aes(x, y, width = w))
+
+b <- a + geom_tile(aes(fill = z), colours= "grey50")
+
 

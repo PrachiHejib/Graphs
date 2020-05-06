@@ -2,7 +2,6 @@
 
 rm(list = ls(all = TRUE))
 
-install.packages("ggplot2")
 library(ggplot2)
 library(readxl)
 library("RColorBrewer", lib.loc="/Library/Frameworks/R.framework/Versions/3.5/Resources/library")
@@ -24,8 +23,9 @@ df <- data.frame(
 
 a <- ggplot(df, aes(x, y, width = w))
 
-b <- a + geom_tile(aes(fill = z), colours= "grey50")
+b <- a + geom_tile(aes(fill = z))
 
-c <- b + scale_fill_gradient(low="grey", high="grey50")
+b + scale_fill_gradient(low="grey", high="grey50")
+
 
 

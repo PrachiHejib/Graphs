@@ -23,7 +23,7 @@ df <- data.frame(
 
 a <- ggplot(df, aes(x, y, width = w))
 
-b <- a + geom_tile(aes(fill = z))
+b <- a + geom_tile(aes(fill = z), show.legend = FALSE)
 c <- b + scale_fill_gradient(low="grey", high="grey50")
 c + labs(title ="", x = "", y = "") + theme_solid()
 

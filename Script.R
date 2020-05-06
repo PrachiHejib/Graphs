@@ -26,4 +26,6 @@ a <- ggplot(df, aes(x, y, width = w))
 
 b <- a + geom_tile(aes(fill = z), colours= "grey50")
 
+c <- b + scale_fill_gradient(low="grey", high="grey50")
+
 

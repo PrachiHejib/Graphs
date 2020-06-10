@@ -21,7 +21,10 @@ lottery <- Lotteries_Code_2 %>% select(Lottery, p1)
 #rename coloumns
 lottery <- lottery %>% rename(roll=Lottery, payoff=p1)
 
-#
+#use median/average to label boxes (creates a new table)
+medians <- lottery %>% group_by(payoff) %>% summarize(loc=median(roll), min=min(roll), max=max(roll))
+
+#create data frame for lotteries blocks 
 df <- data.frame(
   x = 1:100,
   y = rep(1, 100),
@@ -33,10 +36,12 @@ a <- ggplot(df, aes(x, y, width = w))
 
 b <- a + geom_tile(aes(fill = z), show.legend = FALSE)
 c <- b + scale_fill_gradient(low="grey", high="grey50")
-c + labs(title ="", x = "", y = "") + theme_solid() 
+d <- c + labs(title ="", x = "", y = "") + theme_solid()
 
-#use median/average to label boxes 
-medians <- lottery %>% group_by(payoff) %>% summarize(loc=median(roll), min=min(roll), max=max(roll))
-  
+d + geom_label(data = medians %>% filter(payoff==0), aes(x=loc, y=1, label=payoff))
+       
+#geom_text(data = medians, aes(x=loc, y=1, label = medians$payoff), check_overlap = TRUE)
+
+
 #Find name/call/save graph/plot command
 

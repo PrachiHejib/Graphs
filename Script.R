@@ -5,15 +5,15 @@ rm(list = ls(all = TRUE))
 
 library(ggplot2)
 library(readxl)
-library("RColorBrewer", lib.loc="/Library/Frameworks/R.framework/Versions/3.5/Resources/library")
-library("ggthemes", lib.loc="/Library/Frameworks/R.framework/Versions/3.5/Resources/library")
+library(RColorBrewer)
+library(ggthemes)
 library(reshape2)
 library(dplyr)
 
 #plot from data 
-Lotteries_Code_2 <- read_excel("~/Documents/OneDrive_ University_of_East Anglia/UEA/Year_2/Paper_1 /Experiment /Lotteries_Code_2.xlsx")
+Lotteries_Code_2 <- read_excel("Lotteries_Code_2.xlsx")
 
-View(Lotteries_Code_2)   
+# View(Lotteries_Code_2)   
 
 #create new data frame  with only lottery and p1
 lottery <- Lotteries_Code_2 %>% select(Lottery, p1) 
@@ -32,16 +32,10 @@ df <- data.frame(
   w = rep(1, 100)
 )
 
-a <- ggplot(df, aes(x, y, width = w))
+ggplot(df, aes(x, y)) +
+    geom_tile(aes(fill=z), show.legend=FALSE) +
+    scale_fill_gradient(low="grey", high="grey50") +
+    labs(title="", x="", y="") + theme_solid() +
+    geom_text(aes(x=loc, y=1, label=payoff), data=medians)
 
-b <- a + geom_tile(aes(fill = z), show.legend = FALSE)
-c <- b + scale_fill_gradient(low="grey", high="grey50")
-d <- c + labs(title ="", x = "", y = "") + theme_solid()
-
-d + geom_label(data = medians %>% filter(payoff==0), aes(x=loc, y=1, label=payoff))
-       
-#geom_text(data = medians, aes(x=loc, y=1, label = medians$payoff), check_overlap = TRUE)
-
-
-#Find name/call/save graph/plot command
-
+ggsave("plot.pdf")

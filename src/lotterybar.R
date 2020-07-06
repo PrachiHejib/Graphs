@@ -6,7 +6,7 @@ rm(list = ls(all = TRUE))
 library(tidyverse)
 library(ggthemes)
 
-make_figure <- function(lottery) {
+make_figure <- function(lottery, filename) {
   # Compute coordinates for graph elements
   coordinates <-
       lottery %>% group_by(payoff) %>%
@@ -38,7 +38,7 @@ make_figure <- function(lottery) {
       geom_text(aes(x=max, y=-2, label=max, hjust="right"),
                 data=coordinates, size=3, colour="gray50")
 
-  ggsave("plot.pdf", width=5, height=1, units="in")
+  ggsave(filename, width=5, height=1, units="in")
 }
 
 # For now - plot lottery p1 only
@@ -46,5 +46,5 @@ lottery <-
     read_csv("data/lotteries.csv") %>%
     select(roll, p1) %>%
     rename(payoff=p1)
-make_figure(lottery)
+make_figure(lottery, "plot.pdf")
 

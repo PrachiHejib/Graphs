@@ -42,10 +42,9 @@ make_figure <- function(lottery, filename) {
   ggsave(filename, width=5, height=1, units="in")
 }
 
-# For now - plot lottery p1 only
-lottery <-
-    read_csv("data/lotteries.csv") %>%
-    select(roll, p1) %>%
-    rename(payoff=p1)
-make_figure(lottery, "fig/lottery_1_A.jpg")
-
+df <- read_csv("data/lotteries.csv")
+for (col in names(df %>% select(-roll))) {
+  print(str_interp("Building graphic for ${col}"))
+  lottery <- df %>% select(roll, col) %>% rename(payoff=col)
+  make_figure(lottery, str_interp("fig/lottery_${col}.jpg"))
+}

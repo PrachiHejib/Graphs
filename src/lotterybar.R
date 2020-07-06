@@ -6,6 +6,7 @@ rm(list = ls(all = TRUE))
 library(tidyverse)
 library(ggthemes)
 
+
 make_figure <- function(lottery, filename) {
   # Compute coordinates for graph elements
   coordinates <-
@@ -46,5 +47,5 @@ lottery <-
     read_csv("data/lotteries.csv") %>%
     select(roll, p1) %>%
     rename(payoff=p1)
-make_figure(lottery, "plot.pdf")
+make_figure(lottery, "fig/lottery_1_A.jpg")
 

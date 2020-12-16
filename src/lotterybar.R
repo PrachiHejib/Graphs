@@ -11,7 +11,8 @@ make_figure <- function(lottery, filename) {
   # Compute coordinates for graph elements
   coordinates <-
       lottery %>% group_by(payoff) %>%
-      summarize(outcome=median(roll), min=min(roll), max=max(roll))
+      summarize(outcome=median(roll), min=min(roll), max=max(roll),
+                percentage=(max(roll)-min(roll)+1), meanroll=mean(roll))
   
   info <-  lottery %>% summarize(mean=mean(payoff), sd=sd(payoff))
 
@@ -34,26 +35,29 @@ make_figure <- function(lottery, filename) {
                 data=coordinates, size=6, colour="white") +
       # Add minimum rolls for each outcome
       geom_text(aes(x=min, y=-2, label=min, hjust="left"),
-                data=coordinates, size=3, colour="gray50") +
-      # Allow space for the roll numbers below the bars
-      ylim(-3, 20) +
+                data=coordinates, size=2, colour="gray50") +
+      # Allow space for the roll numbers below the bars and percentage above
+      ylim(-3, 23) +
       # Allow space for sd label on right of bar
       xlim(-10, 130) +
       # Add maximum rolls for each outcome
       geom_text(aes(x=max, y=-2, label=max, hjust="right"),
-                data=coordinates, size=3, colour="gray50") +
+                data=coordinates, size=2, colour="gray50") +
+      #add percentage labels for each outcome
+      geom_text(aes(x=meanroll, y=12, label=paste(as.character(percentage), "%", sep=""),
+                    hjust="centre"), data=coordinates, size=2, colour="gray50") +
       #add mean label for lottery
-      geom_text(aes(x=110, y=5, label=paste("£", as.character(mean), sep=""), 
-                hjust="centre"), data=info, size=6, colour="gray50") +
+      #geom_text(aes(x=110, y=5, label=paste("£", as.character(mean), sep=""),
+                #hjust="centre"), data=info, size=6, colour="gray50") +
       #add header, mean
-      geom_text(aes(x=110, y=15, label="Mean", 
-                  hjust="centre"), data=info, size=4, colour="black") +
+      #geom_text(aes(x=110, y=15, label="Mean",
+                  #hjust="centre"), data=info, size=4, colour="black") +
       #add SD label for lottery
-      geom_text(aes(x=120, y=5, label=sprintf("%10.1f", sd),
-                  hjust="centre"), data=info, size=6, colour="gray50")+
+      #geom_text(aes(x=120, y=5, label=sprintf("%10.1f", sd),
+                  #hjust="centre"), data=info, size=6, colour="gray50")+
       #add header, SD
-      geom_text(aes(x=127, y=15, label="Risk", 
-                  hjust="centre"), data=info, size=4, colour="black")
+      #geom_text(aes(x=127, y=15, label="Risk",
+                  #hjust="centre"), data=info, size=4, colour="black")
   
 
   ggsave(filename, width=5, height=1, units="in")

@@ -47,7 +47,7 @@
           geom_text(aes(x=max, y=-2, label=max, hjust="right"),
                         data=coordinates, size=3, colour="gray50") +
           # Add percentage labels for each outcome
-          geom_text(aes(x=meanroll, y=12, label=paste(as.character(percentage), "%", sep=""),
+          geom_text(aes(x=meanroll, y=12, label=paste(as.character(percentage), " balls", sep=""),
                             hjust="centre"), data=coordinates, size=3, colour="gray50") +
           #add mean label for lottery
           #geom_text(aes(x=110, y=5, label=paste("£", as.character(mean), sep=""),

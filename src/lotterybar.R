@@ -22,6 +22,7 @@
           geom_rect(data=coordinates,
                     mapping=aes(xmin=min, xmax=max+1, ymin=0, ymax=10, fill=payoff),
                     show.legend=FALSE) +
+          scale_fill_gradient(rescaler=(function(x, to, from) x/20)) +
           # Suppress axis labels
           labs(title="", x="", y="") +
           # Suppress the axis labels and borders
